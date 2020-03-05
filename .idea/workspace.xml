@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f8e49a7-6088-498b-9692-6e461e12c5d0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/web/model/Util/Module.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/web/model/Util/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Example.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Util/Person.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Util/PersonDetails.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Util/Staff.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/SpringFieldCompSci.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Util/Person.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Util/PersonDetails.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Util/Staff.class" beforeDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,7 +36,13 @@
   </component>
   <component name="ProjectId" id="1Y4a7LsgfQMVMs3HRZQC748TWuD" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -42,7 +50,13 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1582205790918" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/css" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CompScience/CompScience" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -59,18 +73,6 @@
       <recent name="D:\College Work\Secure Software Engineering\Projects\Assignment 1\Student-Management-System\src\main\resources\static\css" />
       <recent name="D:\College Work\Secure Software Engineering\Projects\Assignment 1\Student-Management-System\src\main\java\web\model\Util" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Spring Boot.WebApp">
     <configuration name="Example" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -94,7 +96,7 @@
       </method>
     </configuration>
     <configuration name="WebApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="SpringFieldCompSci" />
+      <module name="Student-Management-System" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="web.*" />
@@ -102,6 +104,7 @@
         </pattern>
       </extension>
       <option name="SPRING_BOOT_MAIN_CLASS" value="web.WebApp" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -126,6 +129,7 @@
       <updated>1582204151774</updated>
       <workItem from="1582204156574" duration="1121000" />
       <workItem from="1583387117646" duration="8108000" />
+      <workItem from="1583427944799" duration="1554000" />
     </task>
     <servers />
   </component>
@@ -158,5 +162,19 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="107" y="58" width="800" height="677" key="#Project_Structure" timestamp="1583428010230">
+      <screen x="0" y="27" width="1024" height="741" />
+    </state>
+    <state x="107" y="58" width="800" height="677" key="#Project_Structure/0.27.1024.741@0.27.1024.741" timestamp="1583428010230" />
+    <state x="100" y="27" width="827" height="741" key="#WebApp" timestamp="1583428002158">
+      <screen x="0" y="27" width="1024" height="741" />
+    </state>
+    <state x="100" y="27" width="827" height="741" key="#WebApp/0.27.1024.741@0.27.1024.741" timestamp="1583428002158" />
+    <state x="295" y="154" width="424" height="484" key="FileChooserDialogImpl" timestamp="1583428756905">
+      <screen x="0" y="27" width="1024" height="741" />
+    </state>
+    <state x="295" y="154" width="424" height="484" key="FileChooserDialogImpl/0.27.1024.741@0.27.1024.741" timestamp="1583428756905" />
   </component>
 </project>
