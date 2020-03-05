@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -11,7 +12,7 @@ import java.util.Date;
 public class Staff{
 
     @Id
-    @NotBlank
+    @NotNull
     private int staff_id;
 
     private String firstname;

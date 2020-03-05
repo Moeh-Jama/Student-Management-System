@@ -7,13 +7,14 @@ import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 @Entity
 @Table(name = "student")
 public class Student{
 
     @Id
-    @NotBlank
+    @NotNull
     private int student_id;
 
     private String firstname;
@@ -33,9 +34,10 @@ public class Student{
     private float fees;
 
     public Student(){
-
+        super();
     }
     public Student(int id, String firstname, String surname, Date DOB, String phoneNumber){
+        super();
         this.student_id =id;
         this.firstname = firstname;
         this.surname = surname;
@@ -62,11 +64,11 @@ public class Student{
     public String getFirstname() {
         return this.firstname;
     }
-    public void setID(int id) {
+    public void seStudentID(int id) {
         this.student_id = id;
     }
 
-    public long getID() {
+    public long getStudentID() {
         return this.student_id;
     }
 

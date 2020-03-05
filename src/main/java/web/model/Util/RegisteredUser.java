@@ -6,18 +6,21 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "registered_user")
 public class RegisteredUser {
 
     @Id
-    @NotBlank
+    @NotNull
     private int user_id;
 
     @NotBlank
     private String password;
 
+    @NotNull
     private boolean isStaff;
 
     public RegisteredUser(){
