@@ -7,5 +7,5 @@ import web.model.Util.RegisteredUser;
 
 @Repository
 public interface RegisteredUserRepository extends JpaRepository<RegisteredUser, Integer> {
-    
+
 }

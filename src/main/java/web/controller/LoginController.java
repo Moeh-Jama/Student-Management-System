@@ -7,7 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import web.model.Util.Student;
+import web.repository.StudentRepository;
 import web.service.LoginService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @SessionAttributes("name")
@@ -15,6 +20,9 @@ public class LoginController {
 	
 	@Autowired
     LoginService service;
+
+	@Autowired
+	StudentRepository studentRepository;
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String showLoginPage(ModelMap model){
@@ -33,6 +41,18 @@ public class LoginController {
 		model.put("password", password);
 		
 		return "welcome";
+	}
+
+	@RequestMapping("/showStudents")
+	public String showAllStudents(ModelMap model){
+
+		List<Student> studentList = studentRepository.findAll();
+		System.out.println("Getting students");
+		for(Student student: studentList){
+			System.out.println(student.getFirstname()+" "+student.getSurname());
+		}
+		model.addAttribute("students", studentList);
+		return "showStudents";
 	}
 
 }

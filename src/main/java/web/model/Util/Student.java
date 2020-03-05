@@ -27,7 +27,7 @@ public class Student{
     private String email;
     private String phoneNumber;
 
-
+    private int stage;
     private String address;
 
     private float fees;
@@ -133,6 +133,15 @@ public class Student{
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public int getStage(){
+        return this.stage;
+    }
+
+    public void setStage(int stage){
+        this.stage = stage;
+    }
+
     public void setFees(float fee){
         this.fees = fee;
     }
