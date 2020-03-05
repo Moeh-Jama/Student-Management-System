@@ -1,8 +1,10 @@
-package Util;
+package web.model.Util;
+
+
 
 import java.util.Date;
 
-public interface PersonDetails{
+public interface PersonDetails {
   public String getFullName();
   public void setFirstName(String firstname);
   public void setSurname(String surname);

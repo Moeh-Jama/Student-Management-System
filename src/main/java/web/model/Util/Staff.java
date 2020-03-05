@@ -1,4 +1,4 @@
-package Util;
+package web.model.Util;
 
 import java.util.Date;
 

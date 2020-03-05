@@ -1,8 +1,9 @@
-package Util;
+package web.model.Util;
+
 
 import java.util.Date;
 
-public class Person implements PersonDetails{
+public class Person implements PersonDetails{//
 
     private String firstname;
     private String surname;
