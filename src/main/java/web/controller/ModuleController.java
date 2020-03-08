@@ -18,11 +18,9 @@ public class ModuleController {
 
     // Get a single module
     @GetMapping("/module/{id}")
-    public String getModuleById(ModelMap model, @PathVariable(value = "id") Long moduleId) throws ModuleNotFoundException {
-
+    public String getModuleById(ModelMap model, @PathVariable(value = "id") long moduleId) throws ModuleNotFoundException {
         Module module =  moduleRepository.findById(moduleId).orElseThrow(() -> new ModuleNotFoundException(moduleId));
-
-        model.put("model", module);
+        model.put("module", module);
         return "module";
     }
 

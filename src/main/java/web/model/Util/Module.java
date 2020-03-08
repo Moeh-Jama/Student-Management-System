@@ -6,25 +6,32 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
 @Table(name = "module")
 public class Module {
     @Id
     @NotNull
-    private long moduleID;
+    private long module_id;
     private String moduleName;
+    private String moduleDescription;
+    private Date start_date;
+    private Date end_date;
     private int capacity;
     private int num_of_students;
-    private String staff_coordinator_ID;
+    private int staff_coordinator_ID;
 
 
     public Module(){
         super();
     }
-    public Module(long moduleID, String moduleName, int capacity, int num_of_students, String staff_coordinator_ID){
-        this.moduleID = moduleID;
+    public Module(long moduleID, String moduleName, String description, Date startDate, Date endDate, int num_of_students, int capacity, int staff_coordinator_ID){
+        this.module_id = moduleID;
         this.moduleName = moduleName;
+        this.moduleDescription = description;
+        this.start_date = startDate;
+        this.end_date = endDate;
         this.capacity = capacity;
         this.num_of_students = num_of_students;
         this.staff_coordinator_ID= staff_coordinator_ID;
@@ -32,11 +39,11 @@ public class Module {
 
 
     public long getModuleId() {
-        return this.moduleID;
+        return this.module_id;
     }
 
     public void setModuleID(long moduleID){
-        this.moduleID = moduleID;
+        this.module_id = moduleID;
     }
 
     public String getModuleName() {
@@ -46,6 +53,21 @@ public class Module {
     public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
     }
+
+    public void setModuleDescription(String desc){
+        this.moduleDescription= desc;
+    }
+    public String getModuleDescription(){
+        return this.moduleDescription;
+    }
+
+
+
+    public void setStartDate(Date newStartDate){this.start_date = newStartDate;}
+    public Date getStartDate(){return this.start_date;}
+
+    public void setEndDate(Date newEndDate){this.end_date = newEndDate;}
+    public Date getEndDate(){return this.end_date;}
 
     public int getCapacity() {
         return capacity;
@@ -63,11 +85,11 @@ public class Module {
         this.num_of_students = num_of_students;
     }
 
-    public String getStaff_coordinator_ID() {
+    public int getStaff_coordinator_ID() {
         return staff_coordinator_ID;
     }
 
-    public void setStaff_coordinator_ID(String staff_coordinator_ID) {
+    public void setStaff_coordinator_ID(int staff_coordinator_ID) {
         this.staff_coordinator_ID = staff_coordinator_ID;
     }
 }
