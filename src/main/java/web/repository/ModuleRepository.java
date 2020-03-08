@@ -1,4 +1,11 @@
 package web.repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import web.model.Util.Module;
 
-public interface ModuleRepository {
+@Repository
+public interface ModuleRepository extends JpaRepository<Module, Long> {
+
 }

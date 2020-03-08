@@ -1,12 +1,27 @@
 package web.model.Util;
+import org.springframework.context.annotation.Primary;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+@Entity
+@Table(name = "module")
 public class Module {
+    @Id
+    @NotNull
     private long moduleID;
     private String moduleName;
     private int capacity;
     private int num_of_students;
     private String staff_coordinator_ID;
 
+
+    public Module(){
+        super();
+    }
     public Module(long moduleID, String moduleName, int capacity, int num_of_students, String staff_coordinator_ID){
         this.moduleID = moduleID;
         this.moduleName = moduleName;
