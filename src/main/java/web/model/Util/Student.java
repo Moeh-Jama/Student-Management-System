@@ -1,7 +1,5 @@
 package web.model.Util;
-
 import org.springframework.context.annotation.Primary;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -9,6 +7,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+
 @Entity
 @Table(name = "student")
 public class Student{
