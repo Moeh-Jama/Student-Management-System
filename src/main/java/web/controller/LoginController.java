@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import web.exception.RegisteredUserNotFoundException;
 import web.exception.StudentNotFoundException;
 import web.model.Util.RegisteredUser;
@@ -36,19 +37,38 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public String showWelcomePage(ModelMap model, @RequestParam String name, @RequestParam String password) throws Exception{
+	public ModelAndView showWelcomePage(ModelMap model, @RequestParam String name, @RequestParam String password) throws StudentNotFoundException{
 
 		int id = 400;
-		int person_id = Integer.parseInt(name);
+		int temp_person = -1;
 
-		RegisteredUser ru = registeredUserRepository.findById(person_id).orElseThrow(() ->new RegisteredUserNotFoundException(person_id));
+		try{
+			temp_person = Integer.parseInt(name);
+		}catch(Exception nameNotNumerical){
+			System.out.println("Entered Student ID is not numeric");
+			return new ModelAndView("redirect:/login", model);
+		}
+		int person_id = temp_person;
+		RegisteredUser ru = null;
+		try{
+			ru = registeredUserRepository.findById(person_id).orElseThrow(() ->new RegisteredUserNotFoundException(person_id));
+		}catch(RegisteredUserNotFoundException registeredUserException){
+			System.out.println("Exception: "+registeredUserException.getMessage());
+		}
 		if(ru!=null){
 			Student student =      studentRepository.findById(person_id).orElseThrow(() -> new StudentNotFoundException(person_id));
 			System.out.println("User found: "+student.getFirstname());
-			return "showStudents";
+//			return "showStudents";
+//			return showAllStudents(model);
 
+			return new ModelAndView("redirect:/showStudents", model);
 		}
-		return "welcome";
+		else{
+			//go back to login again.
+			return new ModelAndView("redirect:/login", model);
+		}
+//		return "welcome";
+
 	}
 
 	@RequestMapping("/showStudents")
