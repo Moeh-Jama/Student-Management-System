@@ -31,7 +31,7 @@
         <tr>
             <th>Module ID</th>
             <th>Module_name</th>
-<%--            <th>module description</th>--%>
+            <th>module description</th>
             <th>start data</th>
             <th>end date</th>
             <th>number of students enrolled</th>
@@ -42,13 +42,21 @@
             <tr>
                 <td><a href="/enroll/<c:out value="${module.getModuleId()}"/>"><c:out value="${module.getModuleId()}" /></a></td>
                 <td><c:out value="${module.getModuleName()}" /></td>
-<%--                <td><c:out value="${module.getModuleDescription()}" /></td>--%>
                 <td><c:out value="${module.getStartDate()}" /></td>
                 <td><c:out value="${module.getEndDate()}" /></td>
                 <td><c:out value="${module.getNum_of_students()}" /></td>
                 <td><c:out value="${module.getCapacity()}" /></td>
             </tr>
         </c:forEach>
+        <tr>
+            <td><c:out value="${module.getModuleId()}" /></td>
+            <td><c:out value="${module.getModuleName()}" /></td>
+            <td><c:out value="${module.getModuleDescription()}" /></td>
+            <td><c:out value="${module.getStartDate()}" /></td>
+            <td><c:out value="${module.getEndDate()}" /></td>
+            <td><c:out value="${module.getNum_of_students()}" /></td>
+            <td><c:out value="${module.getCapacity()}" /></td>
+        </tr>
     </table>
 
 </div>
@@ -59,7 +67,9 @@
         <li><a href="/enroll">Enroll</a></li>
         <li><a href="/showStudents">Students</a></li>
     </ul>
-
+    <div id="logout">
+        <a href="/logout">LOG OUT</a>
+    </div>
 </div>
 
 

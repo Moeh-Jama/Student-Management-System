@@ -73,6 +73,10 @@
         <li><a href="/enroll">Enroll</a></li>
         <li><a href="/showStudents">Students</a></li>
     </ul>
+
+    <div id="logout">
+        <a href="/logout">LOG OUT</a>
+    </div>
 </div>
 
 

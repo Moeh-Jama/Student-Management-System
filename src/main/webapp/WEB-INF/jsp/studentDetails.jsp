@@ -49,12 +49,16 @@
 
 <div id="right_container">
     <ul>
-        <li><a href="/payFees">Pay Fees</a></li>
+        <li><a href="/studentDetails/<c:out value="${student.getStudentID()}" />/Fee">Pay Fees</a></li>
         <li><a href="/editModule">Edit Module</a></li>
         <li><a href="/module">Modules</a></li>
         <li><a href="/enroll">Enroll</a></li>
         <li><a href="/showStudents">Students</a></li>
     </ul>
+
+    <div id="logout">
+        <a href="/logout">LOG OUT</a>
+    </div>
 </div>
 
 
