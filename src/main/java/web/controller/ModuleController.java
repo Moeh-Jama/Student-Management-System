@@ -62,27 +62,30 @@ public class ModuleController {
 
 
     @GetMapping("edit/{module_id}")
-    public String editModule(ModelMap model,@PathVariable(value="module_id") Long module_id, HttpSession currentSesssion) throws ModuleNotFoundException {
+    public ModelAndView editModule(ModelMap model,@PathVariable(value="module_id") Long module_id, HttpSession currentSesssion) throws ModuleNotFoundException {
+        System.out.println("GEtt this and post");
         String currentUserType =(String) currentSesssion.getAttribute("userType");
+        System.out.println("user type "+currentUserType);
         if(currentUserType==null){
             //TODO return to login page with some message
             model.addAttribute("ErrorMessage", "cannot edit modules when not logged in");
-            return null;
+            return new ModelAndView("redirect:/login", model);
         }
         else if(currentUserType.equals("student")){
             //TODO student cannot edit modules, show blank and tell them to go away
-            return null;
+            return new ModelAndView("redirect:/availableModules", model);
         }
         else if(currentUserType.equals("staff")){
+
             System.out.println("User is staff correct!");
             Module module = moduleRepository.findById(module_id).orElseThrow(()-> new ModuleNotFoundException(module_id));
             System.out.println(module);
             model.addAttribute("module",module);
-            return "editModule";
+            return new ModelAndView("redirect:/edit/"+module_id, model);
         }
         else{
             // Some user is messing with sessions some how, big yikes.
-            return null;
+            return new ModelAndView("redirect:/availableModules", model);
         }
     }
 

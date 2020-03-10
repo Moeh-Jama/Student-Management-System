@@ -57,6 +57,8 @@ public class LoginController {
 		RegisteredUser ru = null;
 		boolean isStaff = false;
 		try{
+			System.out.println(person_id);
+			System.out.println(password);
 			ru = registeredUserRepository.findById(person_id).orElseThrow(() -> new RegisteredUserNotFoundException(person_id));
 			isStaff = registeredUserRepository.isRegisteredUserStaffType(person_id);
 
@@ -147,6 +149,15 @@ public class LoginController {
 		model.addAttribute("ErrorMessage", "Could not register user, ID is already used");
 
 		return "register";
+	}
+
+
+
+	@RequestMapping(value ="/logout", method = RequestMethod.GET)
+	public ModelAndView logout(ModelMap model,HttpSession session){
+		String current  = (String) session.getAttribute("userType");
+		session.removeAttribute("userType");
+		return new ModelAndView("redirect:/login", model);
 	}
 
 }

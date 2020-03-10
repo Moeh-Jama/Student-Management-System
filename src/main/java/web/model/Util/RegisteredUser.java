@@ -28,11 +28,11 @@ public class RegisteredUser {
         super();
     }
 
-    public RegisteredUser(int userID, String password, boolean isStaff){
+    public RegisteredUser(int userID, String password, boolean isStaffCool){
         System.out.println("IS STaff: "+isStaff);
         this.user_id = userID;
         this.password = password;
-        this.isStaff = isStaff;
+        this.isStaff = isStaffCool;
     }
 
     public int getUserID(){
