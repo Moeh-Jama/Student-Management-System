@@ -23,6 +23,10 @@
 </div>
 
 <div id="item_container">
+    <div id="item_title">
+        <h2>  Module Table </h2>
+    </div>
+
     <table>
         <tr>
             <th>Module ID</th>
@@ -48,6 +52,11 @@
 </div>
 
 <div id="right_container">
+    <ul>
+        <li><a href="/module">Modules</a></li>
+        <li><a href="/enroll">Enroll</a></li>
+        <li><a href="/showStudents">Students</a></li>
+    </ul>
 
 </div>
 

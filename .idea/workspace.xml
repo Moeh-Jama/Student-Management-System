@@ -10,6 +10,7 @@
       <change beforePath="$PROJECT_DIR$/target/classes/web/controller/ModuleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/web/controller/ModuleController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/web/model/Util/Module.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/web/model/Util/Module.class" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -74,6 +75,18 @@
       <recent name="D:\College Work\Secure Software Engineering\Projects\Assignment 1\Student-Management-System\src\main\java\web\model\Util" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager" selected="Spring Boot.WebApp">
     <configuration name="Example" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="web.Example" />
@@ -96,7 +109,7 @@
       </method>
     </configuration>
     <configuration name="WebApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="Student-Management-System" />
+      <module name="SpringFieldCompSci" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="web.*" />
@@ -134,6 +147,7 @@
       <workItem from="1583486447998" duration="1096000" />
       <workItem from="1583591073829" duration="11546000" />
       <workItem from="1583688428252" duration="4217000" />
+      <workItem from="1583866316161" duration="1179000" />
     </task>
     <servers />
   </component>

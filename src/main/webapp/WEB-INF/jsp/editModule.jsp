@@ -24,6 +24,10 @@
 </div>
 
 <div id="item_container">
+    <div id="item_title">
+        <h2>  Edit Modules </h2>
+    </div>
+
 
     <form th:action="@{edit/{module_id}}" method="post">
         Module ID <input type="text" name="module_id" value="${module.getModuleId()}" readonly><br>
@@ -64,7 +68,11 @@
 </div>
 
 <div id="right_container">
-
+    <ul>
+        <li><a href="/module">Modules</a></li>
+        <li><a href="/enroll">Enroll</a></li>
+        <li><a href="/showStudents">Students</a></li>
+    </ul>
 </div>
 
 
