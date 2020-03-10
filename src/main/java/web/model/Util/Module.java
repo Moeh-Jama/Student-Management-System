@@ -1,25 +1,33 @@
 package web.model.Util;
 import org.springframework.context.annotation.Primary;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Entity
 @Table(name = "module")
 public class Module {
     @Id
     @NotNull
+    @Column(name="module_id")
     private long module_id;
+    @Column(name="module_name")
     private String moduleName;
+    @Column(name="module_description")
     private String moduleDescription;
+    @Column(name="start_date")
     private Date start_date;
+    @Column(name="end_date")
     private Date end_date;
+    @Column(name="student_capacity")
     private int capacity;
+    @Column(name="number_enrolled")
     private int num_of_students;
+    @Column(name="coordinator_id")
     private int staff_coordinator_ID;
 
 
@@ -35,6 +43,9 @@ public class Module {
         this.capacity = capacity;
         this.num_of_students = num_of_students;
         this.staff_coordinator_ID= staff_coordinator_ID;
+    }
+    public String toString(){
+        return this.getModuleId()+","+this.getModuleName()+","+this.getStartDate()+","+this.getEndDate()+","+this.getCapacity();
     }
 
 
@@ -91,5 +102,38 @@ public class Module {
 
     public void setStaff_coordinator_ID(int staff_coordinator_ID) {
         this.staff_coordinator_ID = staff_coordinator_ID;
+    }
+
+    public String getStartDateString(){
+//        return this.start_date.toString();
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris"));
+        calendar.setTime(this.start_date);
+        System.out.println("Month is :"+calendar.get(Calendar.MONTH));
+        int Year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        if (month <10 && day>10){
+            String output = Year +"-0"+month+"-"+day;
+            System.out.println("Output is: "+output);
+            return output;
+        }
+        else if(month<10 && day<10){
+            String output = Year +"-0"+month+"-0"+day;
+            System.out.println("Output is: "+output);
+            return output;
+        }
+        else if(month<10 && day>=10){
+            String output = Year +"-0"+month+"-"+day;
+            System.out.println("Output is: "+output);
+            return output;
+        }
+        else if(month>=10 && day<10){
+            String output = Year +"-"+month+"-0"+day;
+            System.out.println("Output is: "+output);
+            return output;
+        }
+        String output = Year +"-"+month+"-"+day;
+        System.out.println("Output is: "+output);
+        return output;
     }
 }

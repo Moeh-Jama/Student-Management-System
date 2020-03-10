@@ -124,19 +124,29 @@ public class LoginController {
 		System.out.println("Gender: "+student.getGender());
 		System.out.println("Stage: "+student.getStage());
 
+
+
 		RegisteredUser ru = new RegisteredUser(studentID,password,false);
-		List<RegisteredUser> registeredUsersList = registeredUserRepository.findAll();
-		for(RegisteredUser r: registeredUsersList){
-			if(r.getUserID() == ru.getUserID()){
-				System.out.println("User exists: "+r.getUserID()+" "+r.getPassword());
-				return "register";
-			}
+//		List<RegisteredUser> registeredUsersList = registeredUserRepository.findAll();
+		boolean otherFound= false;
+		try{
+			RegisteredUser other = registeredUserRepository.findById(studentID).orElseThrow(()-> new RegisteredUserNotFoundException(studentID));
+			otherFound = true;
+		}catch (Exception e){
+			otherFound = false;
 		}
 
-		registeredUserRepository.save(ru);
-		studentRepository.save(student);
+		if(!otherFound){
+			registeredUserRepository.save(ru);
+			studentRepository.save(student);
+			return "login";
+		}
+
+
 //		model.put("justRegistered",true);
-		return "login";
+		model.addAttribute("ErrorMessage", "Could not register user, ID is already used");
+
+		return "register";
 	}
 
 }
