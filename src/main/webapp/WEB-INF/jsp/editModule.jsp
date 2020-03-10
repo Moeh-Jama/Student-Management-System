@@ -15,10 +15,10 @@
 
 <div id="top_container">
     <h1>
-        Welcome to this school.
+        University of Springfield
     </h1>
     <h2>
-        Module Details
+        Modules
     </h2>
 
 </div>

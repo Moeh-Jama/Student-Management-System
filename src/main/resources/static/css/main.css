@@ -147,9 +147,13 @@ li a:hover {
     padding: 20px;
 }
 
-#stud_det{
-
+#fee_box{
+    width: 20%;
+    min-height: 20%;
+    border: 1px solid #d1d1d1;
+    padding: 5%;
+    margin: auto;
+    margin-top: 2%;
 }
-
 
 

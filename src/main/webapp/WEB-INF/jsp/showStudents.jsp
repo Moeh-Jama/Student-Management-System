@@ -19,7 +19,7 @@
 
         </div>
         <h1>
-            Welcome to this school.
+            University of Springfield
         </h1>
         <h2>
             Students
@@ -53,7 +53,9 @@
                 </tr>
             </c:forEach>
         </table>
+
     </div>
+
 
     </div>
 
