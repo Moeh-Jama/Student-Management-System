@@ -8,4 +8,5 @@ import web.model.Util.RegisteredUser;
 @Repository
 public interface RegisteredUserRepository extends JpaRepository<RegisteredUser, Integer> {
 
+//    @Query("Select password from RegisteredUser where user_id==")
 }

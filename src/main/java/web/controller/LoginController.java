@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import web.exception.RegisteredUserNotFoundException;
+import web.exception.StudentNotFoundException;
 import web.model.Util.RegisteredUser;
 import web.model.Util.Student;
 import web.repository.RegisteredUserRepository;
@@ -34,16 +36,18 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public String showWelcomePage(ModelMap model, @RequestParam String name, @RequestParam String password){
-		
-		boolean isValidUser = service.validateUser(name, password);
-		if (!isValidUser) {
-			model.put("errorMessage", "Invalid Credentials");
-			return "login";
+	public String showWelcomePage(ModelMap model, @RequestParam String name, @RequestParam String password) throws Exception{
+
+		int id = 400;
+		int person_id = Integer.parseInt(name);
+
+		RegisteredUser ru = registeredUserRepository.findById(person_id).orElseThrow(() ->new RegisteredUserNotFoundException(person_id));
+		if(ru!=null){
+			Student student =      studentRepository.findById(person_id).orElseThrow(() -> new StudentNotFoundException(person_id));
+			System.out.println("User found: "+student.getFirstname());
+			return "showStudents";
+
 		}
-		model.put("name", name);
-		model.put("password", password);
-		
 		return "welcome";
 	}
 

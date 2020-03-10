@@ -24,6 +24,8 @@ public class ModuleController {
         return "module";
     }
 
+    // Get available modules for user
+
     // Get modules by topic
 
 }
