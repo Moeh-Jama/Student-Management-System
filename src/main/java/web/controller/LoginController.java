@@ -116,16 +116,16 @@ public class LoginController {
 		String[] dob = date.split("-");
 		Date d  = new Date(Integer.parseInt(dob[0]),Integer.parseInt(dob[1]),Integer.parseInt(dob[2]));
 		student.setDataOfBirth(d);
-		System.out.println("Student Registered");
-		System.out.println("Student Id: "+student.getStudentID());
-		System.out.println("User entered Password"+password);
-		System.out.println("firstName "+student.getFirstname());
-		System.out.println("surname "+student.getSurname());
-		System.out.println("Address: "+student.getAddress());
-		System.out.println("Nationality: "+student.getNationality());
-		System.out.println("DOB: "+student.getDateOfBirth());
-		System.out.println("Gender: "+student.getGender());
-		System.out.println("Stage: "+student.getStage());
+//		System.out.println("Student Registered");
+//		System.out.println("Student Id: "+student.getStudentID());
+//		System.out.println("User entered Password"+password);
+//		System.out.println("firstName "+student.getFirstname());
+//		System.out.println("surname "+student.getSurname());
+//		System.out.println("Address: "+student.getAddress());
+//		System.out.println("Nationality: "+student.getNationality());
+//		System.out.println("DOB: "+student.getDateOfBirth());
+//		System.out.println("Gender: "+student.getGender());
+//		System.out.println("Stage: "+student.getStage());
 
 
 
