@@ -17,6 +17,7 @@ import web.repository.StaffRepository;
 import web.repository.StudentRepository;
 import web.service.LoginService;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -43,9 +44,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public ModelAndView showWelcomePage(ModelMap model, @RequestParam String name, @RequestParam String password) throws Exception {
-
-		int id = 400;
+	public ModelAndView showWelcomePage(ModelMap model, @RequestParam String name, @RequestParam String password, HttpSession session) throws Exception {
 		int temp_person = -1;
 
 		try{
@@ -60,19 +59,22 @@ public class LoginController {
 		try{
 			ru = registeredUserRepository.findById(person_id).orElseThrow(() -> new RegisteredUserNotFoundException(person_id));
 			isStaff = registeredUserRepository.isRegisteredUserStaffType(person_id);
+
 		}catch(RegisteredUserNotFoundException registeredUserException){
 			System.out.println("Exception: "+registeredUserException.getMessage());
 		}
 		if(ru!=null){
 			if(isStaff){
 				Staff staff = staffRepository.findById(person_id).orElseThrow(()-> new StaffNotFoundException(person_id));
-
+				session.setAttribute("staff", staff);
+				session.setAttribute("userType","staff");
 				return new ModelAndView("redirect:/showStudents", model);
 			}
 			else{
 				Student student = studentRepository.findById(person_id).orElseThrow(() -> new StudentNotFoundException(person_id));
 				System.out.println("User found: "+student.getFirstname());
-
+				session.setAttribute("userType","student");
+				session.setAttribute("student",student);
 				return new ModelAndView("redirect:/showStudents", model);
 			}
 		}
@@ -80,8 +82,6 @@ public class LoginController {
 			//go back to login again.
 			return new ModelAndView("redirect:/login", model);
 		}
-//		return "welcome";
-
 	}
 
 	@RequestMapping("/showStudents")
