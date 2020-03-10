@@ -1,15 +1,15 @@
-h1{
-    color:#0000FF;
+h1, h2{
+    margin: 30px;
 }
 
-h2{
-    color:#FF0000;
-
+html{
+    background: rgb(178,226,255);
+    background: linear-gradient(270deg, rgba(178,226,255,1) 0%, rgba(0,60,162,1) 64%, rgba(178,226,255,1) 100%);
 }
 
 #top_container {
-    box-shadow: 5px 5px 5px #9d9d9d;
-    border-radius: 15px;
+    background: white;
+    border-radius: 10px 0px 0px 0px;
 
     margin-top: 2%;
     margin-left: 5%;
@@ -21,36 +21,135 @@ h2{
 
     min-width: 66%;
     max-width: 66%;
-    height: 20%;
+    min-height: 20%;
+    overflow: hidden;
+    position: relative;
 
+}
+#top_login_box{
+    right: 0;
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    border: 1px solid black;
+}
+#top_login_box ul {
+    list-style-type: none;
+    width: 100%;
+    background-color: #f1f1f1;
+}
+#top_login_box li a{
+    height: 40%;
 }
 
 #item_container{
-
+    background: white;
     float: left;
     border:2px solid rgba(0, 0, 0, 0.81);
+    border-radius: 0px 0px 0px 10px;
     min-width: 66%;
     max-width: 66%;
     min-height: 500px;
-    margin-top: 2%;
-    margin-left: 5%;
-    margin-right: 1%;
-
+    margin: 2% 1% 3% 5%;
 
 }
-
+#item_title{
+    border: 1px solid rgba(0, 0, 0, 0.81);
+    width: 100%;
+    min-height: 7%;
+    background: rgba(30, 90, 198, 0.61);
+    text-align: center;
+}
 #right_container{
+    background: #f1f1f1;
     height: 90%;
     top: 0;
     right: 0;
     position: fixed;
     border: 2px solid rgba(0, 0, 0, 0.81);
-
+    border-radius: 0px 10px 10px 0px;
     min-width: 21%;
     max-width: 21%;
 
     margin-top: 2%;
     margin-left: 1%;
     margin-right: 5%;
+    overflow: hidden;
+}
+
+ul {
+    list-style-type: none;
+    width: 100%;
+    background-color: #f1f1f1;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+li a {
+    text-decoration: none;
+    display: block;
+    color: #000;
+    height: 10%;
+    border-bottom: 1px solid black;
+    padding: 10px;
+}
+li a:hover {
+    background-color: rgba(33, 103, 236, 0.61);
+    color: white;
+}
+
+#login_box{
+    width: 20%;
+    min-height: 20%;
+    border: 1px solid #d1d1d1;
+    padding: 5%;
+    margin: auto;
+    margin-top: 2%;
+}
+
+#reg_student{
+    min-width: 15%;
+    float: left;
+    margin: 30px;
+}
+#reg_details{
+    min-width: 15%;
+    float: left;
+    margin: 30px;
+}
+#reg_contact{
+    min-width: 15%;
+    float: left;
+    margin: 30px;
+}
+
+#ss_table{
+    margin: 30px;
+}
+#ss_table table, th, td {
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+#ss_table th, td {
+    padding: 10px;
+}
+
+#module_table{
+    margin: 30px;
+}
+#module_table table, th, td {
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+#module_table th, td {
+    padding: 20px;
+}
+
+#stud_det{
 
 }
+
+
+
