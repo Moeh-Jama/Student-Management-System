@@ -52,7 +52,7 @@
         <li><a href="/studentDetails/<c:out value="${student.getStudentID()}" />/Fee">Pay Fees</a></li>
         <li><a href="/editModule">Edit Module</a></li>
         <li><a href="/module">Modules</a></li>
-        <li><a href="/enroll">Enroll</a></li>
+        <li><a href="/available_modules/">Enroll</a></li>
         <li><a href="/showStudents">Students</a></li>
     </ul>
 

@@ -70,7 +70,7 @@
 <div id="right_container">
     <ul>
         <li><a href="/module">Modules</a></li>
-        <li><a href="/enroll">Enroll</a></li>
+        <li><a href="/available_modules/">Enroll</a></li>
         <li><a href="/showStudents">Students</a></li>
     </ul>
 
