@@ -24,7 +24,7 @@
 
 <div id="item_container">
     <div id="item_title">
-        <h2>  Module Table </h2>
+        <h2>  Available Module Table </h2>
     </div>
 
     <table>
@@ -38,9 +38,9 @@
             <th>Maximum Student Capacity</th>
             <th></th>
         </tr>
-        <c:forEach  var="module" items="${availableModules}">
+        <c:forEach  var="module" items="${modules}">
             <tr>
-                <td><c:out value="${module.getModuleId()}" /></td>
+                <td><a href="/enroll/<c:out value="${module.getModuleId()}"/>"><c:out value="${module.getModuleId()}" /></a></td>
                 <td><c:out value="${module.getModuleName()}" /></td>
 <%--                <td><c:out value="${module.getModuleDescription()}" /></td>--%>
                 <td><c:out value="${module.getStartDate()}" /></td>

@@ -6,12 +6,15 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import web.model.Util.EnrolledModuleStudent;
 import web.model.Util.Module;
 import web.model.Util.Student;
+import web.repository.EnrolledModuleStudentRepository;
 import web.repository.ModuleRepository;
 import web.exception.ModuleNotFoundException;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +23,9 @@ public class ModuleController {
 
     @Autowired
     ModuleRepository moduleRepository;
+
+    @Autowired
+    EnrolledModuleStudentRepository enrolledModuleStudentRepository;
 
     // Get a single module
     @GetMapping("/module/{id}")
@@ -30,35 +36,132 @@ public class ModuleController {
     }
 
     // Get available modules for user
-    @GetMapping("availableModules/")
-    public ModelAndView getAllRegisteredModulesForUser(ModelMap model,HttpSession currentSession){
+    @GetMapping("available_modules/")
+    public String getAllRegisteredModulesForUser(ModelMap model,HttpSession currentSession){
         System.out.println("Begn Find Available Modules");
 
             String c = (String) currentSession.getAttribute("userType");
             System.out.println("C IS: "+c);
             if(c==null){
-                return new ModelAndView("redirect:/login", model);
+//                return new ModelAndView("redirect:/login", model);
+                return "login";
             }
 
 
         if(currentSession.getAttribute("userType").equals("student")){
+
             Student student = (Student) currentSession.getAttribute("student");
-            System.out.println(student+" "+student==null);
-            System.out.println("Student id: "+student.getStudentID());
+            if(student==null){
+                System.out.println("Student deosn't exist");
+//                return new ModelAndView("redirect:/login", model);
+                return "login";
+            }
+            System.out.println("foudn student:"+student);
+            System.out.println(student+" is null[?] "+student==null);
+//            System.out.println("Student id: "+student.getStudentID());
             List<Module> availableModules = moduleRepository.getAllAvailableModules(student.getStudentID());
+            List<EnrolledModuleStudent> enrolledModuleStudents = enrolledModuleStudentRepository.findAll();
+            List<Module> notEnrolled = new ArrayList<>();
             for(Module module: availableModules){
                 System.out.println("Module id:"+module.getModuleId());
+                boolean found = false;
+                for(EnrolledModuleStudent ems: enrolledModuleStudents){
+                    if(ems.getEms_module_id()==module.getModuleId() && student.getStudentID()==ems.getEms_student_id())
+                        found = true;
+                }
+                if(!found){
+                    notEnrolled.add(module);
+                }
+
             }
-            model.addAttribute("modules", availableModules);
-            return new ModelAndView("redirect:/available_modules", model);
-        }else if(currentSession.getAttribute("userType").equals("staff")){
+            ModelAndView mam = new ModelAndView("available_modules");
+            model.addAttribute("modules", notEnrolled);
+            mam.addObject(mam);
+            mam.addObject(currentSession);
+            return "available_modules";
+//            return mam;
+        }else {
             //go away
+//            return new ModelAndView("redirect:/login", model);
+            return "login";
+        }
+
+//        return new ModelAndView("redirect:/login", model);
+//        return "login";
+    }
+    // Get modules by topic
+
+
+    @GetMapping("enroll/{module_id}")
+    public String getEnrollModel(ModelMap model, @PathVariable(value="module_id") Long module_id, HttpSession session){
+        String userType = (String) session.getAttribute("userType");
+        if(userType==null || !userType.equals("student")){
+            System.out.println("Is not student");
+            return "welcome";
+        }
+//        Student student = (Student) session.getAttribute("student");
+        System.out.println("Check for module");
+        Module module = null;
+
+
+//            module = moduleRepository.findById(module.getModuleId()).orElseThrow(()-> new ModuleNotFoundException(module_id));
+            for(Module mod: moduleRepository.findAll()){
+                if(mod.getModuleId()==module_id){
+                    module = mod;
+                    break;
+                }
+            }
+
+        System.out.println("Acces completed "+module==null);
+
+        model.put("module", module);
+        return "enroll";
+    }
+
+    @PostMapping("enroll/{module_id}")
+    public ModelAndView postEnrollModule(ModelMap model, HttpSession session, @PathVariable(value="module_id") long module_id){
+        String userType = (String) session.getAttribute("userType");
+        if(userType==null || !userType.equals("student")){
+            return new ModelAndView("redirect:/login", model);
+        }
+
+        Student student = (Student) session.getAttribute("student");
+       Module module = null;
+       try{
+           module = moduleRepository.findById(module_id).orElseThrow(() -> new ModuleNotFoundException(module_id));
+       }
+       catch(Exception e){
+           return new ModelAndView("redirect:/login", model);
+        }
+
+//       int a = (int) module_id;
+       if(student!=null){
+
+            List<EnrolledModuleStudent> enrolledModuleStudentList = enrolledModuleStudentRepository.findAll();
+            boolean alreadyExists = false;
+            for(EnrolledModuleStudent ems: enrolledModuleStudentList){
+                if(ems.getEms_student_id()==student.getStudentID() && ems.getEms_module_id()==module_id){
+                    alreadyExists = true;
+                    break;
+                }
+            }
+
+            if(!alreadyExists){
+                EnrolledModuleStudent ems = new EnrolledModuleStudent((int) module_id,(int) student.getStudentID(), module.getEndDate(), 0);
+                enrolledModuleStudentRepository.save(ems);
+                System.out.println("DONEW");
+                return new ModelAndView("redirect:/available_modules", model);
+            }
+            System.out.println("Bad workl");
+           return new ModelAndView("redirect:/available_modules", model);
+
+        }
+        else{
+           System.out.println("Done bad");
             return new ModelAndView("redirect:/available_modules", model);
         }
 
-        return new ModelAndView("redirect:/available_modules", model);
     }
-    // Get modules by topic
 
 
     @GetMapping("edit/{module_id}")

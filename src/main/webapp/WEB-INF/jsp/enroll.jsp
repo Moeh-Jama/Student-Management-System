@@ -31,6 +31,7 @@
         <h2>  Module Table </h2>
     </div>
     <div id="module_table">
+        <form action="/enroll/${module.getModuleId()}" method="post">
         <table>
             <tr>
                 <th>Module ID</th>
@@ -53,6 +54,8 @@
                 <td><c:out value="${module.getCapacity()}" /></td>
             </tr>
         </table>
+            <input type="submit" name="submit">
+        </form>
     </div>
 
 
