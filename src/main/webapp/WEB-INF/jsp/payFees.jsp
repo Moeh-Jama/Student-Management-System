@@ -4,7 +4,7 @@
 <html>
 
 <head>
-
+    <title>Pay Fees</title>
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css"/>
 </head>
@@ -22,7 +22,7 @@
         University of Springfield
     </h1>
     <h2>
-        Students
+        Fees
     </h2>
 
 
@@ -31,9 +31,21 @@
 
 <div id="item_container">
     <div id="item_title">
-        <h2>  Student Details  </h2>
+        <h2>  Pay Fees </h2>
     </div>
 
+    <div id="fee_box">
+
+        <form action='register' method="post">
+            <h3>Payment</h3>
+            Student Name:  <c:out value="${student.getFullName()}"/><br><br>
+            Money owed: €<c:out value="${student.getFees()}"/> <br><br>
+            Enter: <br> <input type="number" step="0.01" placeholder="Payment Fee" name="fees"/><br><br>
+            <br>
+            <input name="Pay" type="submit">
+
+        </form>
+    </div>
 
 </div>
 

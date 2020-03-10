@@ -23,7 +23,7 @@
     </div>
 
     <h1>
-        Welcome to this school.
+        University of Springfield
     </h1>
     <h2>
         Register
@@ -37,7 +37,7 @@
     </div>
 
 
-    <form id="reg_css" action='register' method="post">
+    <form action='register' method="post">
         <div id="reg_student">
             <h3>Register Student</h3><br>
             Email:<br> <input type="email" placeholder="email@domain.com" name="email" value="<c:out value='${student.email}' />"/><br><br>
