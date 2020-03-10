@@ -1,0 +1,22 @@
+Joiedel Agustin - 16472304
+Mohamed Jama - 16355491
+William Nwosu - 16303711
+
+Group Project Diary Documentation
+
+Group Leader: Mohamed Jama
+Front End Designer: Joiedel Agustin
+Coding: Mohamed Jama, Joiedel Agustin and William Nwosu.
+
+Joiedel Tasks:
+Joiedel Agustin created the Student and Module classes. 
+
+Joiedel Agustin designed the look of the website and started creating the model classes. CSS and HTML work, Log in controller initiated by Joiedel Agustin.
+Starting the Module controller and Testing of program was Done By William Nwosu.
+Complete backend programming is done by Mohamed Jama such as log in/logout, pay fees,enroll students, enroll into module, modules, studentDetails etc. 
+Rest of Controllers are coded by Mohamed Jama.
+
+First Week: Created the model classes
+Second Week: 
+Third Week: created the controllers
+Final Week: created the CSS and JSP files (Front end) and finishing up the controller (Back end)	
