@@ -37,6 +37,7 @@
     <div id="ss_table">
         <table>
             <tr>
+                <th>Student ID</th>
                 <th>Full Name</th>
                 <th>Current Stage</th>
                 <th>Date of Birth</th>
@@ -45,6 +46,7 @@
             </tr>
             <c:forEach  var="student" items="${students}">
                 <tr>
+                    <td><a href="/studentDetails/<c:out value="${student.getStudentID()}" />"><c:out value="${student.getStudentID()}" /></a></td>
                     <td><c:out value="${student.getFullName()}" /></td>
                     <td><c:out value="${student.getStage()}"/></td>
                     <td><c:out value="${student.getDateOfBirth()}"/></td>

@@ -42,7 +42,7 @@
             Money owed: €<c:out value="${student.getFees()}"/> <br><br>
             Enter: <br> <input type="number" step="0.01" placeholder="Payment Fee" name="fees"/><br><br>
             <br>
-            <input name="Pay" type="submit">
+            <input name="Pay" type="submit" value="  Pay  " >
 
         </form>
     </div>
