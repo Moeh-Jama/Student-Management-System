@@ -35,13 +35,13 @@ public class StaffController {
 
 
     @GetMapping("module/{module_id}/grades")
-    public String getStudentsInModuleDisplayed(ModelMap model,
+    public ModelAndView getStudentsInModuleDisplayed(ModelMap model,
         @PathVariable(value = "module_id") int module_id,
                                                HttpSession session) {
         String userType = (String) session.getAttribute("userType");
         System.out.println("USER ENTERED!!!");
         if(userType==null || !userType.equals("staff")){
-            return "login";
+            return new ModelAndView("redirect:/login", model);
         }
 
         Staff staff  =(Staff) session.getAttribute("staff");
@@ -71,20 +71,22 @@ public class StaffController {
             System.out.println("Finishing up lool"+finalOutput.size());
             model.addAttribute("moduleGrades", finalOutput);model.addAttribute("moduleID", module_id);
         }
-
-        return "moduleGrades";
+        ModelAndView mam = new ModelAndView("moduleGrades");
+//        return new ModelAndView("redirect:/module/"+module_id+"/grades", model);
+        return mam;
     }
 
 
+
     @RequestMapping(value="module/{module_id}/grades/{student_id}", method=RequestMethod.GET)
-    public String editStudentGrade(ModelMap model, @PathVariable(value = "module_id")
+    public ModelAndView editStudentGrade(ModelMap model, @PathVariable(value = "module_id")
             Long module_id, @PathVariable(value = "student_id") Long student_id, HttpSession session) {
 
         String userType = (String) session.getAttribute("userType");
         System.out.println("get editStudentGrade");
         if(userType==null || !userType.equals("staff")){
             //direct to another place
-            return "welcome";
+            return new ModelAndView("redirect:/studentDetails/"+student_id, model);
         }
         EnrolledModuleStudent gradeDetails = null;
         try{
@@ -100,9 +102,11 @@ public class StaffController {
         }catch(Exception e){
 
         }
-
+        ModelAndView mam = new ModelAndView("editStudentGrade");
         model.addAttribute("gradeDetails", gradeDetails);
-        return "editStudentGrade";
+        mam.addObject(model);
+//        return new ModelAndView("redirect:/module/"+module_id+"/grades/"+student_id, model);
+        return mam;
     }
 
 
