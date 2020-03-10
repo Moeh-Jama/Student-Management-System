@@ -34,11 +34,23 @@
         <h2>  Student Details  </h2>
     </div>
 
+    <div id="stu_det">
+        <ul>
+            <li><span>Full Name: </span> <c:out value="${student.getFullName()}" /></li>
+            <li><span>Current Stage :</span>   <c:out value="${student.getStage()}"/></li>
+            <li><span>Date of Birth:</span> <c:out value="${student.getDateOfBirth()}"/></li>
+            <li><span>Gender: </span><c:out value="${student.getGender()}"/></li>
+            <li><span>Nationality:</span> <c:out value="${student.getNationality()}"/></li>
+        </ul>
+    </div>
+
 
 </div>
 
 <div id="right_container">
     <ul>
+        <li><a href="/payFees">Pay Fees</a></li>
+        <li><a href="/editModule">Edit Module</a></li>
         <li><a href="/module">Modules</a></li>
         <li><a href="/enroll">Enroll</a></li>
         <li><a href="/showStudents">Students</a></li>

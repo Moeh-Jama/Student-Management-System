@@ -63,7 +63,7 @@
             Address:<br> <input type="address" size="50" placeholder="Address" name="address" value="<c:out value='${student.address}' />"/><br><br>
             Phone Number:<br> <input type="text" placeholder="[prefix] number" name="phoneNumber" value="<c:out value='${student.phoneNumber}' />"/><br><br>
             <br>
-            <input type="submit">
+            <input type="submit" value="REGISTER">
         </div>
 
 

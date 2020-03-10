@@ -57,7 +57,8 @@ html{
     border: 1px solid rgba(0, 0, 0, 0.81);
     width: 100%;
     min-height: 7%;
-    background: rgba(30, 90, 198, 0.61);
+    background: rgba(9, 45, 140, 0.82);
+    color: white;
     text-align: center;
 }
 #right_container{
@@ -156,4 +157,26 @@ li a:hover {
     margin-top: 2%;
 }
 
+#stu_det{
+    margin: 30px;
+    padding: 10px;
+    height: 50%;
+    width: auto;
+    border: 1px solid black;
+    text-align: center;
 
+}
+#stu_det ul{
+    background-color: #a7def1;
+}
+#stu_det span{
+    font-weight: bold;
+}
+#stu_det li{
+    text-align: left;
+    padding: 10px;
+    border-top: 1px solid #787878;
+    border-bottom: 1px solid #787878;
+    font-size: 15px;
+    font-weight: normal;
+}
