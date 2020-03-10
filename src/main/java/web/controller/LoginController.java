@@ -59,8 +59,9 @@ public class LoginController {
 		try{
 			System.out.println(person_id);
 			System.out.println(password);
-			ru = registeredUserRepository.findById(person_id).orElseThrow(() -> new RegisteredUserNotFoundException(person_id));
 			isStaff = registeredUserRepository.isRegisteredUserStaffType(person_id);
+			System.out.println("Staff is: "+isStaff);
+			ru = registeredUserRepository.findById(person_id).orElseThrow(() -> new RegisteredUserNotFoundException(person_id));
 
 		}catch(RegisteredUserNotFoundException registeredUserException){
 			System.out.println("Exception: "+registeredUserException.getMessage());
@@ -77,7 +78,7 @@ public class LoginController {
 				System.out.println("User found: "+student.getFirstname());
 				session.setAttribute("userType","student");
 				session.setAttribute("student",student);
-				return new ModelAndView("redirect:/showStudents", model);
+				return new ModelAndView("redirect:/studentDetails/"+student.getStudentID(), model);
 			}
 		}
 		else{

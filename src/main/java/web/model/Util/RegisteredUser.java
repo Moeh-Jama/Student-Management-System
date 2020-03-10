@@ -21,7 +21,8 @@ public class RegisteredUser {
     @NotBlank
     private String password;
 
-    @Column(name = "is_staff")
+    @NotNull
+    @Column(name = "isStaff")
     private boolean isStaff;
 
     public RegisteredUser(){
