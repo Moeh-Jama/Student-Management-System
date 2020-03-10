@@ -2,6 +2,7 @@ package web.model.Util;
 
 import org.springframework.context.annotation.Primary;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -20,7 +21,7 @@ public class RegisteredUser {
     @NotBlank
     private String password;
 
-    @NotNull
+    @Column(name = "is_staff")
     private boolean isStaff;
 
     public RegisteredUser(){
@@ -28,6 +29,7 @@ public class RegisteredUser {
     }
 
     public RegisteredUser(int userID, String password, boolean isStaff){
+        System.out.println("IS STaff: "+isStaff);
         this.user_id = userID;
         this.password = password;
         this.isStaff = isStaff;
@@ -52,6 +54,10 @@ public class RegisteredUser {
     }
     public void setStaff(boolean isStaff){
         this.isStaff = isStaff;
+    }
+
+    public String toString(){
+        return this.getUserID()+" | "+this.getPassword()+" | "+this.isStaff();
     }
 
 }

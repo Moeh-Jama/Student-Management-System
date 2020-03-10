@@ -7,10 +7,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import web.exception.RegisteredUserNotFoundException;
+import web.exception.StaffNotFoundException;
 import web.exception.StudentNotFoundException;
 import web.model.Util.RegisteredUser;
+import web.model.Util.Staff;
 import web.model.Util.Student;
 import web.repository.RegisteredUserRepository;
+import web.repository.StaffRepository;
 import web.repository.StudentRepository;
 import web.service.LoginService;
 
@@ -30,6 +33,9 @@ public class LoginController {
 
 	@Autowired
 	RegisteredUserRepository registeredUserRepository;
+
+	@Autowired
+	StaffRepository staffRepository;
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String showLoginPage(ModelMap model){
@@ -37,7 +43,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public ModelAndView showWelcomePage(ModelMap model, @RequestParam String name, @RequestParam String password) throws StudentNotFoundException{
+	public ModelAndView showWelcomePage(ModelMap model, @RequestParam String name, @RequestParam String password) throws Exception {
 
 		int id = 400;
 		int temp_person = -1;
@@ -50,18 +56,25 @@ public class LoginController {
 		}
 		int person_id = temp_person;
 		RegisteredUser ru = null;
+		boolean isStaff = false;
 		try{
-			ru = registeredUserRepository.findById(person_id).orElseThrow(() ->new RegisteredUserNotFoundException(person_id));
+			ru = registeredUserRepository.findById(person_id).orElseThrow(() -> new RegisteredUserNotFoundException(person_id));
+			isStaff = registeredUserRepository.isRegisteredUserStaffType(person_id);
 		}catch(RegisteredUserNotFoundException registeredUserException){
 			System.out.println("Exception: "+registeredUserException.getMessage());
 		}
 		if(ru!=null){
-			Student student =      studentRepository.findById(person_id).orElseThrow(() -> new StudentNotFoundException(person_id));
-			System.out.println("User found: "+student.getFirstname());
-//			return "showStudents";
-//			return showAllStudents(model);
+			if(isStaff){
+				Staff staff = staffRepository.findById(person_id).orElseThrow(()-> new StaffNotFoundException(person_id));
 
-			return new ModelAndView("redirect:/showStudents", model);
+				return new ModelAndView("redirect:/showStudents", model);
+			}
+			else{
+				Student student = studentRepository.findById(person_id).orElseThrow(() -> new StudentNotFoundException(person_id));
+				System.out.println("User found: "+student.getFirstname());
+
+				return new ModelAndView("redirect:/showStudents", model);
+			}
 		}
 		else{
 			//go back to login again.

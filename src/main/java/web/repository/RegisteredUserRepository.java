@@ -8,5 +8,6 @@ import web.model.Util.RegisteredUser;
 @Repository
 public interface RegisteredUserRepository extends JpaRepository<RegisteredUser, Integer> {
 
-//    @Query("Select password from RegisteredUser where user_id==")
+    @Query(value="Select ru.isStaff from registered_user ru where ru.user_id = ?1", nativeQuery =true)
+    Boolean isRegisteredUserStaffType(Integer id);
 }
