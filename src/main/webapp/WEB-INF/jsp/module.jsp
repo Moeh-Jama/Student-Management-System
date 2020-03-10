@@ -65,10 +65,15 @@
 <div id="right_container">
     <ul>
         <li><a href="/module">Modules</a></li>
-        <li><a href="/editModule">Edit Module</a></li>
+        <li><a href="/edit/<c:out value="${module.getModuleId()}" />">Edit Module</a></li>
         <li><a href="/enroll">Enroll</a></li>
         <li><a href="/showStudents">Students</a></li>
+
     </ul>
+
+    <div id="logout">
+        <a href="/logout">LOG OUT</a>
+    </div>
 </div>
 
 

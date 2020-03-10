@@ -36,13 +36,12 @@
 
     <div id="fee_box">
 
-        <form action="/studentDetails/${student.getStudentID()}/Fee" method="post">
+        <form action='register' method="post">
             <h3>Payment</h3>
             Student Name:  <c:out value="${student.getFullName()}"/><br><br>
             Money owed: €<c:out value="${student.getFees()}"/> <br><br>
-<%--            Enter: <br> <input type="number" step="0.01" placeholder="Payment Fee" name="fees"/><br><br>--%>
-<%--            <br>--%>
-
+            Enter: <br> <input type="number" step="0.01" placeholder="Payment Fee" name="fees"/><br><br>
+            <br>
             <input name="Pay" type="submit" value="  Pay  " >
 
         </form>
@@ -56,6 +55,10 @@
         <li><a href="/enroll">Enroll</a></li>
         <li><a href="/showStudents">Students</a></li>
     </ul>
+
+    <div id="logout">
+        <a href="/logout">LOG OUT</a>
+    </div>
 </div>
 
 
