@@ -67,19 +67,20 @@ public class LoginController {
 			System.out.println("Exception: "+registeredUserException.getMessage());
 		}
 		if(ru!=null){
-			if(isStaff){
+			if(isStaff &&  ru.getPassword().equals(password)){
 				Staff staff = staffRepository.findById(person_id).orElseThrow(()-> new StaffNotFoundException(person_id));
 				session.setAttribute("staff", staff);
 				session.setAttribute("userType","staff");
 				return new ModelAndView("redirect:/showStudents", model);
 			}
-			else{
+			else if( !(isStaff) &&  ru.getPassword().equals(password)){
 				Student student = studentRepository.findById(person_id).orElseThrow(() -> new StudentNotFoundException(person_id));
 				System.out.println("User found: "+student.getFirstname());
 				session.setAttribute("userType","student");
 				session.setAttribute("student",student);
 				return new ModelAndView("redirect:/studentDetails/"+student.getStudentID(), model);
 			}
+			return new ModelAndView("redirect:/login", model);
 		}
 		else{
 			//go back to login again.
