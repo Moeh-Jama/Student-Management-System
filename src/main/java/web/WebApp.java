@@ -13,7 +13,6 @@ GRANT ALL PRIVILEGES ON *.* TO 'WatchMojoTop10'@'localhost';
  */
 
 @SpringBootApplication
-
 public class WebApp {
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(WebApp.class);
