@@ -192,3 +192,11 @@ li a:hover {
     background: rgba(255, 0, 0, 0.24);
     border: 1px solid black;
 }
+
+#password_validate{
+    border: 1px solid #000000;
+    min-width: 15%;
+    float: left;
+    margin: 5px;
+    padding: 10px
+}

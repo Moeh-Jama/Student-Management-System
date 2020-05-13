@@ -34,9 +34,9 @@
 	<div id="login_box">
 		<span style="color: red; ">${errorMessage}</span>
 		<form method="post">
-			<input type="text" name="name" placeholder="Student ID" /> <br>
+			<input required type="text" name="name" placeholder="Student ID" /> <br>
 			<br>
-			<input type="password" name="password" placeholder="Password"/> <br>
+			<input required type="password" name="password" placeholder="Password"/> <br>
 			<br>
 			<input type="submit" value=" LOG IN " />
 		</form>
@@ -55,6 +55,7 @@
 
 
 </body>
+
 
 
 </html>
