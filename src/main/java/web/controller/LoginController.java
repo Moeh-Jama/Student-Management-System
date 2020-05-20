@@ -16,16 +16,21 @@ import web.repository.RegisteredUserRepository;
 import web.repository.StaffRepository;
 import web.repository.StudentRepository;
 import web.service.LoginService;
-
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+import java.util.logging.Logger;
+
 
 @Controller
 @SessionAttributes("name")
 public class LoginController {
-	
+
+	// Logger to log login details
+	public static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
+
 	@Autowired
     LoginService service;
 
@@ -51,6 +56,7 @@ public class LoginController {
 			temp_person = Integer.parseInt(name);
 		}catch(Exception nameNotNumerical){
 			System.out.println("Entered Student ID is not numeric");
+			LOGGER.info("Logger: Failed login attempt\n"); // Just added
 			return new ModelAndView("redirect:/login", model);
 		}
 		int person_id = temp_person;
@@ -62,6 +68,8 @@ public class LoginController {
 			isStaff = registeredUserRepository.isRegisteredUserStaffType(person_id);
 			System.out.println("Staff is: "+isStaff);
 			ru = registeredUserRepository.findById(person_id).orElseThrow(() -> new RegisteredUserNotFoundException(person_id));
+			LOGGER.info("Logger: ID: " + Integer.toString(person_id) + "\n"); // Just added
+			LOGGER.info("Logger: password logged " + "\n"); // Not supposed to log sensitive information
 
 		}catch(RegisteredUserNotFoundException registeredUserException){
 			System.out.println("Exception: "+registeredUserException.getMessage());

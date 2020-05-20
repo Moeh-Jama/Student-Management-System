@@ -12,15 +12,17 @@ import web.model.Util.Student;
 import web.repository.EnrolledModuleStudentRepository;
 import web.repository.ModuleRepository;
 import web.exception.ModuleNotFoundException;
-
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 public class ModuleController {
 
+    // Logger for module changes
+    private static final Logger LOGGER = Logger.getLogger(ModuleController.class.getName());
     @Autowired
     ModuleRepository moduleRepository;
 
@@ -183,11 +185,14 @@ public class ModuleController {
             System.out.println("User is staff correct!");
             Module module = moduleRepository.findById(module_id).orElseThrow(()-> new ModuleNotFoundException(module_id));
             System.out.println(module);
+            LOGGER.info("Logger: Module " + module + " is being edited by a staff member\n");
             model.addAttribute("module",module);
             return new ModelAndView("redirect:/edit/"+module_id, model);
         }
         else{
             // Some user is messing with sessions some how, big yikes.
+            LOGGER.info("Logger: Unauthorized module edit attempt\n");
+
             return new ModelAndView("redirect:/availableModules", model);
         }
     }
@@ -225,6 +230,7 @@ public class ModuleController {
             System.out.println("Module to change");
             System.out.println(module.toString());
             System.out.println(editedModule.toString());
+            LOGGER.info("Logger: Module " + module.toString() + " has been edited into module " + editedModule.toString() + "\n");
             System.out.println("THIS ONE HERE: "+capacity+","+module_name+","+coordID+","+enrolled_students+","+startDate+","+endDate);
             Module newModule = new Module();
             module.setCapacity(capacity);
@@ -245,6 +251,7 @@ public class ModuleController {
         }
         else{
             // Some user is messing with sessions some how, big yikes.
+            LOGGER.info("Logger: Unauthorized module change attempt\n");
             return new ModelAndView("redirect:/login", model);
         }
     }

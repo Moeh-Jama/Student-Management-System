@@ -10,15 +10,17 @@ import web.model.Util.Student;
 import web.repository.EnrolledModuleStudentRepository;
 import web.repository.ModuleRepository;
 import web.repository.StudentRepository;
-
 import javax.servlet.http.HttpSession;
+import java.util.logging.Logger;
 
 @Controller
 public class StudentController {
 
+    // Logger to log fee payment details
+    private static final Logger LOGGER = Logger.getLogger(StudentController.class.getName());
+
     @Autowired
     StudentRepository studentRepository;
-
 
     @Autowired
     ModuleRepository moduleRepository;
@@ -85,6 +87,7 @@ public class StudentController {
 
         student.setFees(0);
         studentRepository.save(student);
+        LOGGER.info("Logger: student " + student.getStudentID() + " has paid fees. Fee payment logged.");
         ModelAndView mam = new ModelAndView("payFees");
         mam.addObject(model);
         return mam;
