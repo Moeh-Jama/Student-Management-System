@@ -63,6 +63,13 @@
             <version>6.0.12.Final</version>
         </dependency>
 
+        <!-- Guava Dependency, needed for LoadingCache -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>21.0</version>
+        </dependency>
+
 <!--        &lt;!&ndash;Logger DEPENDENCIES&ndash;&gt;-->
 <!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 &ndash;&gt;-->
 <!--        <dependency>-->

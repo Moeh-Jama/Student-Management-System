@@ -15,10 +15,14 @@ import web.model.Util.Student;
 import web.repository.RegisteredUserRepository;
 import web.repository.StaffRepository;
 import web.repository.StudentRepository;
+import web.service.LoginAttemptService;
 import web.service.LoginService;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
+//import web.service.LoginAttemptService;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 import java.util.logging.Logger;
@@ -35,6 +39,12 @@ public class LoginController {
 	LoginService service;
 
 	@Autowired
+	LoginAttemptService loginAttemptService;
+
+	@Autowired
+	private HttpServletRequest request;
+
+	@Autowired
 	StudentRepository studentRepository;
 
 	@Autowired
@@ -43,6 +53,12 @@ public class LoginController {
 	@Autowired
 	StaffRepository staffRepository;
 
+	@RequestMapping(value="blocked", method=RequestMethod.GET)
+	public String blockedPage(ModelMap model){
+		model.addAttribute("ip", getIP());
+		return "blocked";
+	}
+
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String showLoginPage(ModelMap model,  @RequestParam(required = false) String error){
 		System.out.println("Error message is "+error);
@@ -50,8 +66,17 @@ public class LoginController {
 		return "login";
 	}
 
+
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public ModelAndView showWelcomePage(ModelMap model, @RequestParam String name, @RequestParam String password, HttpSession session) throws Exception {
+		String ip = getIP();
+
+		if(loginAttemptService.isBlocked(ip)){
+			//go back
+//			System.out.println("You are blocked")
+			return new ModelAndView("redirect:/blocked", model);
+		}
+
 		int temp_person = -1;
 
 		try{
@@ -74,13 +99,16 @@ public class LoginController {
 			LOGGER.info("Logger: password logged " + "\n"); // Not supposed to log sensitive information
 
 		}catch(RegisteredUserNotFoundException registeredUserException){
-			System.out.println("Exception: "+registeredUserException.getMessage());
+//			System.out.println("Exception: "+registeredUserException.getMessage());
+			loginAttemptService.loginFailed(ip);
+			return new ModelAndView("redirect:/login", model);
 		}
 		if(ru!=null){
 			if(isStaff &&  ru.getPassword().equals(password)){
 				Staff staff = staffRepository.findById(person_id).orElseThrow(()-> new StaffNotFoundException(person_id));
 				session.setAttribute("staff", staff);
 				session.setAttribute("userType","staff");
+				loginAttemptService.loginSucceeded(ip);
 				return new ModelAndView("redirect:/showStudents", model);
 			}
 			else if( !(isStaff) &&  ru.getPassword().equals(password)){
@@ -88,12 +116,15 @@ public class LoginController {
 				System.out.println("User found: "+student.getFirstname());
 				session.setAttribute("userType","student");
 				session.setAttribute("student",student);
+				loginAttemptService.loginSucceeded(ip);
 				return new ModelAndView("redirect:/studentDetails/"+student.getStudentID(), model);
 			}
+			loginAttemptService.loginFailed(ip);
 			return new ModelAndView("redirect:/login", model);
 		}
 		else{
 			//go back to login again.
+			loginAttemptService.loginFailed(ip);
 			return new ModelAndView("redirect:/login", model);
 		}
 	}
@@ -159,6 +190,23 @@ public class LoginController {
 		String current  = (String) session.getAttribute("userType");
 		session.removeAttribute("userType");
 		return new ModelAndView("redirect:/login", model);
+	}
+
+
+
+	private String getIP() {
+		String header = request.getHeader("X-Forwarded-For");
+		String output = "";
+
+		if (header == null){
+			output =  request.getRemoteAddr();
+		}
+		else {
+			// If the request does not have an IP, then we parse the header
+			output =  header.split(",")[0];
+		}
+
+		return output;
 	}
 
 }
