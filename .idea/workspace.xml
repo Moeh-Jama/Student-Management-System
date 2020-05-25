@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f8e49a7-6088-498b-9692-6e461e12c5d0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/blocked.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/web/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/web/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/web/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/web/controller/LoginController.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -182,7 +185,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1590433775829" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1590442894131" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/slf4j-log4j12-1.7.30.jar!/" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -310,12 +313,8 @@
       <workItem from="1589896501303" duration="2202000" />
       <workItem from="1589923932870" duration="3724000" />
       <workItem from="1589997029867" duration="1838000" />
-<<<<<<< HEAD
-      <workItem from="1590431187205" duration="3431000" />
-=======
       <workItem from="1590431187205" duration="1795000" />
       <workItem from="1590433347710" duration="315000" />
->>>>>>> bd59e64dffb9b046739a375ddcc77189dab9dcfd
     </task>
     <servers />
   </component>
