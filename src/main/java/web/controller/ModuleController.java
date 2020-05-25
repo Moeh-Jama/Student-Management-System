@@ -8,21 +8,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import web.model.Util.EnrolledModuleStudent;
 import web.model.Util.Module;
+import web.model.Util.Staff;
 import web.model.Util.Student;
 import web.repository.EnrolledModuleStudentRepository;
 import web.repository.ModuleRepository;
 import web.exception.ModuleNotFoundException;
+
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Controller
 public class ModuleController {
 
-    // Logger for module changes
-    private static final Logger LOGGER = Logger.getLogger(ModuleController.class.getName());
     @Autowired
     ModuleRepository moduleRepository;
 
@@ -42,12 +41,12 @@ public class ModuleController {
     public String getAllRegisteredModulesForUser(ModelMap model,HttpSession currentSession){
         System.out.println("Begn Find Available Modules");
 
-            String c = (String) currentSession.getAttribute("userType");
-            System.out.println("C IS: "+c);
-            if(c==null){
+        String c = (String) currentSession.getAttribute("userType");
+        System.out.println("C IS: "+c);
+        if(c==null){
 //                return new ModelAndView("redirect:/login", model);
-                return "login";
-            }
+            return "login";
+        }
 
 
         if(currentSession.getAttribute("userType").equals("student")){
@@ -107,12 +106,12 @@ public class ModuleController {
 
 
 //            module = moduleRepository.findById(module.getModuleId()).orElseThrow(()-> new ModuleNotFoundException(module_id));
-            for(Module mod: moduleRepository.findAll()){
-                if(mod.getModuleId()==module_id){
-                    module = mod;
-                    break;
-                }
+        for(Module mod: moduleRepository.findAll()){
+            if(mod.getModuleId()==module_id){
+                module = mod;
+                break;
             }
+        }
 
         System.out.println("Acces completed "+module==null);
 
@@ -128,16 +127,16 @@ public class ModuleController {
         }
 
         Student student = (Student) session.getAttribute("student");
-       Module module = null;
-       try{
-           module = moduleRepository.findById(module_id).orElseThrow(() -> new ModuleNotFoundException(module_id));
-       }
-       catch(Exception e){
-           return new ModelAndView("redirect:/login", model);
+        Module module = null;
+        try{
+            module = moduleRepository.findById(module_id).orElseThrow(() -> new ModuleNotFoundException(module_id));
+        }
+        catch(Exception e){
+            return new ModelAndView("redirect:/login", model);
         }
 
 //       int a = (int) module_id;
-       if(student!=null){
+        if(student!=null){
 
             List<EnrolledModuleStudent> enrolledModuleStudentList = enrolledModuleStudentRepository.findAll();
             boolean alreadyExists = false;
@@ -155,14 +154,30 @@ public class ModuleController {
                 return new ModelAndView("redirect:/available_modules", model);
             }
             System.out.println("Bad workl");
-           return new ModelAndView("redirect:/available_modules", model);
+            return new ModelAndView("redirect:/available_modules", model);
 
         }
         else{
-           System.out.println("Done bad");
+            System.out.println("Done bad");
             return new ModelAndView("redirect:/available_modules", model);
         }
 
+    }
+
+    public boolean validateStaffIsInModule(Module module, Staff staff){
+        if(staff==null)
+            return false;
+        if(module==null)
+            return false;
+
+        if(staff.getID()==module.getStaff_coordinator_ID()){
+            return true;
+        }
+        else{
+
+        }
+
+        return false;
     }
 
 
@@ -185,14 +200,18 @@ public class ModuleController {
             System.out.println("User is staff correct!");
             Module module = moduleRepository.findById(module_id).orElseThrow(()-> new ModuleNotFoundException(module_id));
             System.out.println(module);
-            LOGGER.info("Logger: Module " + module + " is being edited by a staff member\n");
-            model.addAttribute("module",module);
-            return new ModelAndView("redirect:/edit/"+module_id, model);
+            Staff staff = (Staff) currentSesssion.getAttribute("staff");
+            if (validateStaffIsInModule(module, staff)) {
+                model.addAttribute("module",module);
+                return new ModelAndView("editModule", model);
+
+            }
+            return new ModelAndView("welcome");
+
+//          return new ModelAndView("redirect:/edit/"+module_id, model);
         }
         else{
             // Some user is messing with sessions some how, big yikes.
-            LOGGER.info("Logger: Unauthorized module edit attempt\n");
-
             return new ModelAndView("redirect:/availableModules", model);
         }
     }
@@ -200,13 +219,13 @@ public class ModuleController {
 
     @PostMapping("edit/{module_id}")
     public ModelAndView postEditModule(ModelMap model,Module editedModule, @PathVariable(value="module_id") Long module_id,  HttpSession currentSesssion,
-    @RequestParam(value="module_name") String module_name,
-    @RequestParam(value="start_date") String startDate,
-    @RequestParam(value="end_date") String endDate,
-    @RequestParam(value="staff_coordinator_ID") int coordID,
-    @RequestParam(value="module_description") String moduleDescription,
-    @RequestParam(value="capacity") int capacity,
-    @RequestParam(value="num_of_students") int enrolled_students
+                                       @RequestParam(value="module_name") String module_name,
+                                       @RequestParam(value="start_date") String startDate,
+                                       @RequestParam(value="end_date") String endDate,
+                                       @RequestParam(value="staff_coordinator_ID") int coordID,
+                                       @RequestParam(value="module_description") String moduleDescription,
+                                       @RequestParam(value="capacity") int capacity,
+                                       @RequestParam(value="num_of_students") int enrolled_students
     ) throws ModuleNotFoundException {
         System.out.println("Posted yaay");
         String currentUserType =(String) currentSesssion.getAttribute("userType");
@@ -230,7 +249,6 @@ public class ModuleController {
             System.out.println("Module to change");
             System.out.println(module.toString());
             System.out.println(editedModule.toString());
-            LOGGER.info("Logger: Module " + module.toString() + " has been edited into module " + editedModule.toString() + "\n");
             System.out.println("THIS ONE HERE: "+capacity+","+module_name+","+coordID+","+enrolled_students+","+startDate+","+endDate);
             Module newModule = new Module();
             module.setCapacity(capacity);
@@ -251,7 +269,6 @@ public class ModuleController {
         }
         else{
             // Some user is messing with sessions some how, big yikes.
-            LOGGER.info("Logger: Unauthorized module change attempt\n");
             return new ModelAndView("redirect:/login", model);
         }
     }

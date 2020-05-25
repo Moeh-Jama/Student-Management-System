@@ -32,7 +32,7 @@ public class LoginController {
 	public static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
 
 	@Autowired
-    LoginService service;
+	LoginService service;
 
 	@Autowired
 	StudentRepository studentRepository;
@@ -42,12 +42,14 @@ public class LoginController {
 
 	@Autowired
 	StaffRepository staffRepository;
-	
+
 	@RequestMapping(value="/login", method = RequestMethod.GET)
-	public String showLoginPage(ModelMap model){
+	public String showLoginPage(ModelMap model,  @RequestParam(required = false) String error){
+		System.out.println("Error message is "+error);
+		System.out.println(model.keySet());
 		return "login";
 	}
-	
+
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public ModelAndView showWelcomePage(ModelMap model, @RequestParam String name, @RequestParam String password, HttpSession session) throws Exception {
 		int temp_person = -1;
