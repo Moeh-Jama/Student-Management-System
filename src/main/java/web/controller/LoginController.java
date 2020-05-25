@@ -96,7 +96,7 @@ public class LoginController {
 			System.out.println("Staff is: "+isStaff);
 			ru = registeredUserRepository.findById(person_id).orElseThrow(() -> new RegisteredUserNotFoundException(person_id));
 			LOGGER.info("Logger: ID: " + Integer.toString(person_id) + "\n"); // Just added
-			LOGGER.info("Logger: password logged " + "\n"); // Not supposed to log sensitive information
+			LOGGER.info("Logger: password logged " + "\n"); // we won't show the password because we shouldn't log sensitive information
 
 		}catch(RegisteredUserNotFoundException registeredUserException){
 //			System.out.println("Exception: "+registeredUserException.getMessage());
