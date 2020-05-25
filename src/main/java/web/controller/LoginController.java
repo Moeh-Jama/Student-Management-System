@@ -160,6 +160,12 @@ public class LoginController {
 		student.setDataOfBirth(d);
 
 
+		//password validation
+		if(!password.matches("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{10,}")){
+			return "error"; //leads to error.jsp
+		}
+
+
 		RegisteredUser ru = new RegisteredUser(studentID,password,false);
 //		List<RegisteredUser> registeredUsersList = registeredUserRepository.findAll();
 		boolean otherFound= false;
